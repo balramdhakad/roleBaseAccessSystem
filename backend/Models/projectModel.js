@@ -1,12 +1,21 @@
-// const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-// const projectShema = new mongoose.Schema({
-//     title : {
-//         type : String,
-//         required : true,
-//         unique : true
-//     },
-//     createdBy : {
-//         ty
-//     }
-// })
+const projectSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  assignedTo: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+});
+
+module.exports = mongoose.model("Project", projectSchema);

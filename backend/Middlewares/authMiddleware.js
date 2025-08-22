@@ -10,7 +10,6 @@ const authMiddleware = async (req, res, next) => {
 
     const decode = jwt.verify(token, process.env.JWT_SECRET);
 
-    console.log(decode)
     const user = await User.findById(decode.userId);
 
     if (!user) {

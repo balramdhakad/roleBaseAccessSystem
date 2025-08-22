@@ -1,5 +1,5 @@
 const express = require("express");
-const operationControllers = require("../Controllers/operationControllers");
+const operationControllers = require("../Controllers/projectControllers");
 const authMiddleware = require("../Middlewares/authMiddleware");
 const roleCheck = require("../Middlewares/roleCheckMiddleware");
 
@@ -9,25 +9,26 @@ router.post(
   "/create",
   authMiddleware,
   roleCheck("admin", "manager"),
-  operationControllers.createOperation
+  operationControllers.createProject
 );
 router.delete(
-  "/delete",
+  "/delete/:id",
   authMiddleware,
   roleCheck("admin"),
-  operationControllers.deleteOperation
+  operationControllers.deleteProject
 );
 router.get(
   "/read",
   authMiddleware,
   roleCheck("admin", "manager", "developer"),
-  operationControllers.readOperation
+  operationControllers.getProjects
 );
+
 router.put(
-  "/update",
+  "/update/:id",
   authMiddleware,
-  roleCheck("admin"),
-  operationControllers.updateOperation
+  roleCheck("admin","manager"),
+  operationControllers.updateProject
 );
 
 module.exports = router;
